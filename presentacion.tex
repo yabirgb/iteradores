@@ -1,0 +1,106 @@
+\documentclass[spanish]{beamer}
+
+%Language symbols
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc}
+
+% Code
+
+\usepackage{listings,textcomp}
+\lstset{
+  breakatwhitespace,
+  language=Python,
+  columns=fullflexible,
+  keepspaces,
+  breaklines,
+  tabsize=2, 
+  showstringspaces=false,
+  extendedchars=true,
+  basicstyle=\fontfamily{pcr}\selectfont\scriptsize,
+  keywordstyle=\color{orange},
+  upquote=true,
+  literate={-}{-}1}
+
+%Theme
+\usetheme{metropolis}
+
+%Title
+\title{Iteradores y Generadores}
+\date{\today}
+\author{Yábir G. Benchakhtir}
+\institute{LibreIM}
+
+%Document
+\begin{document}
+  \maketitle
+
+  \begin{frame}\frametitle{Contenido}
+    \tableofcontents
+  \end{frame} 
+  \section{¿Iteradores?}
+  \subsection{Conociendo las herramientas}
+  \begin{frame}{¿Qué es un iterador en python?}
+    \begin{definition}
+      Un \textbf{objeto} representando un flujo de datos.
+    \end{definition}
+
+    Tiene las siguientes propiedades:
+
+    \begin{itemize}
+    \item Reiteradas llamadas a \textit{\_\_next\_\_()} devuelve elementos del iterador.
+    \item Devuelve \textbf{StopIteration} cuando no hay más elementos que devolver.
+    \item Necesitan un método \textit{\_\_iter\_\_()} que devuelve el
+      propio objeto. Esto hace a todo iterador iterable.
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Iterables en Python}
+    \begin{definition}
+      Un objeto capaz capaz de devolver uno de sus miembros cada vez.
+    \end{definition}
+
+    Algunos ejemplos de iterables son los tipos \textit{list},
+    \textit{str}, \textit{tuple} y algunos no secuenciales como los
+    diccionarios o los archivos.
+  \end{frame}
+
+  \begin{frame}
+    Los objetos iterables se pueden usar en con todas las estructuras
+    que usen secuencias. Un bucle \textit{for} es el más tipico pero
+    también se puede usar con \textit{map}, \textit{zip}...
+  \end{frame}
+
+  \begin{frame}[fragile]
+    
+    \begin{lstlisting}[language=Python,keywordstyle=\bf,stringstyle=\it]
+      Python 3.6.3 (default, Oct  3 2017, 21:45:48) 
+      [GCC 7.2.0] on linux
+      >>> lst = [0,1,2,3,4,5]
+      >>> lst.__iter__
+      <method-wrapper '__iter__' of list object at 0x7fba41c74b88>
+      >>> iter(lst)
+      <list_iterator object at 0x7fba41c7dbe0>
+      >>> lstIterator = iter(lst)
+      >>> lstIterator.__next__()
+      0
+      >>> next(lstIterator)
+      1
+      
+    \end{lstlisting}
+    
+  \end{frame}
+
+  \begin{frame}{Iterando}
+    
+  \end{frame}
+  
+  \section{Referencias}
+
+  \begin{frame}\frametitle<presentacion>{Referencias}
+    \begin{thebibliography}{10}
+    \bibitem[Python Glossary]{https://docs.python.org/3.6/glossary.html}
+      \newblock{\href{https://docs.python.org/3.6/glossary.html}{Glosario de Python}}
+    \end{thebibliography}
+  \end{frame}
+\end{document}
