@@ -38,7 +38,7 @@
   \begin{frame}\frametitle{Contenido}
     \tableofcontents
   \end{frame} 
-  \section{¿Iteradores?}
+  \section{Iteradores}
   \subsection{Conociendo las herramientas}
   \begin{frame}{¿Qué es un iterador en python?}
     \begin{definition}
@@ -91,10 +91,103 @@
     
   \end{frame}
 
-  \begin{frame}{Iterando}
-    
+  \begin{frame}[fragile]{Iterando}
+    Para iterar sobre un \textit{iterador} podemos usar un bucle \textbf{for}.
+
+    \begin{lstlisting}
+      >>> lst = ["Python", "Ruby", "JS", "Haskell", "Go"]
+      >>> for lang in lst:
+      ...     print(lang)
+      ... 
+      Python
+      Ruby
+      JS
+      Haskell
+      Go
+      >>> 
+    \end{lstlisting}
   \end{frame}
-  
+
+  \begin{frame}[fragile]
+    Lo que nunca hay que hacer es:
+
+    \begin{lstlisting}
+      >>> for i in range(len(lst)):
+      ...     print(lst[i])
+      ... 
+      Python
+      Ruby
+      JS
+      Haskell
+      Go
+
+    \end{lstlisting}
+
+    Algo mejor en caso de necesitar los índices sería:
+
+    \begin{lstlisting}
+      >>> for pos, elem in enumerate(lst):
+      ...     print(pos, " ", elem)
+      ... 
+      0   Python
+      1   Ruby
+      2   JS
+      3   Haskell
+      4   Go
+    \end{lstlisting}
+  \end{frame}
+
+  \section{Generadores}
+  \begin{frame}{Definición}
+    Un generador es una función que usa \textbf{yield} para producir
+    una serie de valores. La función devuelve un generador iterador.
+  \end{frame}
+
+  \begin{frame}[fragile]
+    Un primer ejemplo de generador
+    \begin{lstlisting}
+      >>> def count(start,num):
+      ...     i = start
+      ...     while i <= num:
+      ...         yield i
+      ...         i += 1
+      ... 
+      >>> for i in count(4,9):
+      ...     print(i)
+      ... 
+      4
+      5
+      6
+      7
+      8
+      9
+
+    \end{lstlisting}
+  \end{frame}
+
+
+  \begin{frame}[fragile]
+    También podemos crear generadores con la sintaxis para crear listas por comprehesion.
+    \begin{lstlisting}
+      >>> gen = (x for x in range(10))
+      >>> next(gen)
+      0
+      >>> next(gen)
+      1
+      >>> next(gen)
+      2
+      >>> gen = (x for x in range(2))
+      >>> next(gen)
+      0
+      >>> next(gen)
+      1
+      >>> next(gen)
+      Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      StopIteration
+
+    \end{lstlisting}
+  \end{frame}
   \section{Referencias}
 
   \begin{frame}\frametitle<presentacion>{Referencias}
