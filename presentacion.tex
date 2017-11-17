@@ -39,7 +39,6 @@
     \tableofcontents
   \end{frame} 
   \section{Iteradores}
-  \subsection{Conociendo las herramientas}
   \begin{frame}{¿Qué es un iterador en python?}
     \begin{definition}
       Un \textbf{objeto} representando un flujo de datos.
@@ -188,12 +187,142 @@
 
     \end{lstlisting}
   \end{frame}
-  \section{Referencias}
 
+  \section{Itertools}
+  \begin{frame}[fragile]{Count}
+
+    Sintaxis:
+
+    \begin{lstlisting}
+      itertools.repeat(object[, times])
+    \end{lstlisting}
+
+    Ejemplo:
+
+    \begin{lstlisting}
+      >>> from itertools import repeat
+      >>> a = repeat(2)
+      >>> next(a)
+      2
+      >>> next(a)
+      2
+      >>> next(a)
+      2
+      >>> next(a)
+      2
+      >>> from itertools import repeat
+      >>> b = repeat(3,2)
+      >>> next(b)
+      3
+      >>> next(b)
+      3
+      >>> next(b)
+      Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      StopIteration
+
+    \end{lstlisting}
+    
+  \end{frame}
+
+  \begin{frame}[fragile]{¿Cuándo es útil?}
+
+    Si queremos repetir algo n veces.
+
+    \begin{lstlisting}
+      for _ in itertools.repeat(None, n):
+          repetir()
+    \end{lstlisting}
+
+    es más rápido que
+
+    \begin{lstlisting}
+      for i in range(n):
+          repetir()
+    \end{lstlisting}
+    
+  \end{frame}
+
+  \begin{frame}[fragile]
+
+    También cuando trabajamos con \textit{map} y \textit{zip}
+
+    \begin{lstlisting}
+      >>> list(map(pow, range(10), repeat(2))) 
+      [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+      >>> list(map(pow, range(10), 2)) 
+      Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      TypeError: 'int' object is not iterable
+    \end{lstlisting}
+    
+  \end{frame}
+
+  \subsection{Filtrar datos}
+  \begin{frame}[fragile]{filter}
+
+    Sintaxis:
+
+    \begin{lstlisting}
+      itertools.filterfalse(predicate, iterable)
+    \end{lstlisting}
+
+    Funcionamiento:
+
+    Devuelve un iterador de elementos del iterable para los que el
+    predicado se evalua como falso.
+    
+  \end{frame}
+
+  \begin{frame}[fragile]{while}
+
+    Sintaxis:
+    
+    \begin{lstlisting}
+      itertools.takewhile(predicate, iterable)
+      itertools.dropwhile(predicate, iterable)
+    \end{lstlisting}
+
+    Funcionamiento:
+
+    \begin{itemize}
+    \item \textit{takewhile} devuelve los elementos del iterable hasta
+      que el predicado se evalua como falso para algún elemento.
+    \item \textit{dropwhile} ignora los elementos del iterable hasta que el
+    predicado se evalua como falso para algún elemento.
+    \end{itemize}
+
+  \end{frame}
+
+  \begin{frame}[fragile]
+
+    Sintaxis:
+    
+    \begin{lstlisting}
+      itertools.islice(iterable, stop)
+      itertools.islice(iterable, start, stop[, step])
+    \end{lstlisting}
+
+    Funcionamiento:
+
+    Toma una porción finita de un generador.
+    
+  \end{frame}
+
+  \subsection{Maps}
+
+  \begin{frame}[fragile]{accumulate}
+    
+  \end{frame}
+  
+  \section{Referencias}
   \begin{frame}\frametitle<presentacion>{Referencias}
     \begin{thebibliography}{10}
     \bibitem[Python Glossary]{https://docs.python.org/3.6/glossary.html}
       \newblock{\href{https://docs.python.org/3.6/glossary.html}{Glosario de Python}}
+
+    \bibitem[Itertools]{https://docs.python.org/3/library/itertools.html}
+      \newblock{\href{https://docs.python.org/3/library/itertools.html}{Referencia de Itertools}}
     \end{thebibliography}
   \end{frame}
 \end{document}
