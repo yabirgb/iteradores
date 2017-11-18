@@ -312,6 +312,131 @@
   \subsection{Maps}
 
   \begin{frame}[fragile]{accumulate}
+    Sintaxis:
+
+    \begin{lstlisting}
+      itertools.accumulate(iterable[, func])
+    \end{lstlisting}
+
+    Funcionamiento:
+
+    Devuelve un iterador resultado de aplicar una operación binaria de
+    manera acumulada. Por defecto usa \textit{operator.sum}
+    
+  \end{frame}
+
+  \begin{frame}[fragile]{Ejemplo de uso}
+
+    
+    
+    \begin{lstlisting}
+      >>> s = [5,4,2,8,7,6,3,0,9,1]
+      >>> list(accumulate(s))
+      [5, 9, 11, 19, 26, 32, 35, 35, 44, 45]
+      >>> list(accumulate(s,min))
+      [5, 4, 2, 2, 2, 2, 2, 0, 0, 0]
+      >>> from operator import mul
+      >>> list(accumulate(s,mul))
+      [5, 20, 40, 320, 2240, 13440, 40320, 0, 0, 0]
+    \end{lstlisting}
+    
+  \end{frame}
+
+  \begin{frame}[fragile]{Ejemplo}
+    \begin{lstlisting}
+      iterate(f, x) -> x, f(x), f(f(x)), ...
+    \end{lstlisting}
+
+    \begin{lstlisting}
+      def iterate(f, x):
+          yield x
+          yield from iterate(f, f(x))
+    \end{lstlisting}
+        
+  \end{frame}
+
+
+  \begin{frame}[fragile]
+
+    Una versión que no se quedará sin memoria:
+
+    \begin{lstlisting}
+      def iterate(f, x):
+          while True:
+              yield x
+              x = f(x)
+    \end{lstlisting}
+    
+  \end{frame}
+
+  \begin{frame}[fragile]
+
+    La versión:
+    
+    \begin{lstlisting}
+      def iterate(f, x):
+          return accumulate(repeat(x), lambda fx, _: f(fx))
+    \end{lstlisting}
+
+    Ejemplo de \href{https://github.com/joelgrus/stupid-itertools-tricks-pydata}{@joelgrus}.
+    
+  \end{frame}
+
+  \begin{frame}[fragile]{starmap}
+
+    Sintaxis:
+
+    \begin{lstlisting}
+      itertools.starmap(function, iterable)
+    \end{lstlisting}
+
+    Funcionamiento:
+
+    Mismo funcionamiento que map pero los argumentos han sido agrupados de manera previa.
+    
+    
+    \begin{lstlisting}
+      >>> list(starmap(mul, enumerate("Dark Souls",1)))
+      ['D', 'aa', 'rrr', 'kkkk', '     ', 'SSSSSS', 'ooooooo', 'uuuuuuuu', 'lllllllll', 'ssssssssss']
+    \end{lstlisting}
+
+    
+  \end{frame}
+
+  \subsection{Combinar iteradores}
+  \begin{frame}[fragile]{Algunas funciones interesantes son}
+
+    \begin{lstlisting}
+      itertools.chain(*iterables)
+      itertools.product(*iterables, repeat=1)
+      zip(*iterables)
+      itertools.groupby(iterable, key=None)
+      itertools.permutations(iterable, r=None)
+    \end{lstlisting}
+    
+  \end{frame}
+
+  \section{Extras}
+
+  \begin{frame}[fragile]{Algunas funciones extra}
+
+    \begin{lstlisting}
+      >>> all([1,2,3])
+      True
+      >>> all([1,2,0])
+      False
+      >>> any([1,2,0])
+      True
+      >>> any([1,2,3])
+      True
+      >>> sum([1,2,3])
+      6
+      >>> from functools import reduce
+      >>> from operator import mul
+      >>> reduce(mul,[1,2,3,4])
+      24
+
+    \end{lstlisting}
     
   \end{frame}
   
